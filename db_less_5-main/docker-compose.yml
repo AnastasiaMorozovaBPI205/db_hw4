@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "MOROZOVA_205"
+      POSTGRES_USER: "MOROZOVA_205"
+      POSTGRES_PASSWORD: "MOROZOVA_205"
+      PGDATA: "/var/lib/postgresql/data/pgdata-library"
+    volumes:
+      - ./docker/db/scripts/library:/docker-entrypoint-initdb.d/library.sql
+      - ./dz:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  postgres2:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "MOROZOVA_205"
+      POSTGRES_USER: "MOROZOVA_205"
+      POSTGRES_PASSWORD: "MOROZOVA_205"
+      PGDATA: "/var/lib/postgresql/data/pgdata-trains"
+    volumes:
+      - ./docker/db/scripts/trains:/docker-entrypoint-initdb.d/trains.sql
+      - ./dz:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  postgres3:
+    image: postgres:14.5
+    environment:
+      POSTGRES_DB: "MOROZOVA_205"
+      POSTGRES_USER: "MOROZOVA_205"
+      POSTGRES_PASSWORD: "MOROZOVA_205"
+      PGDATA: "/var/lib/postgresql/data/pgdata-hospital"
+    volumes:
+      - ./docker/db/scripts/hospital:/docker-entrypoint-initdb.d/hospital.sql
+      - ./dz:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
